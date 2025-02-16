@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=4321&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.143.1">
+
+
+<title>Taller 1 - A Hugo website</title>
+<meta property="og:title" content="Taller 1 - A Hugo website">
+
+
+  <link href='//localhost:4321/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Taller 1</h1>
+
+    
+    <span class="article-date">2025-02-15</span>
+    
+
+    <div class="article-content">
+      
+      <h1 id="instalar-paquetes-necesarios-si-no-están-instalados">Instalar paquetes necesarios si no están instalados</h1>
+<pre><code class="language-r">if (!require(&quot;tidyverse&quot;)) install.packages(&quot;tidyverse&quot;)
+if (!require(&quot;ggplot2&quot;)) install.packages(&quot;ggplot2&quot;)
+if (!require(&quot;readr&quot;)) install.packages(&quot;readr&quot;)
+if (!require(&quot;dplyr&quot;)) install.packages(&quot;dplyr&quot;)
+if (!require(&quot;broom&quot;)) install.packages(&quot;broom&quot;)
+</code></pre>
+<pre><code class="language-r">library(tidyverse)
+</code></pre>
+<pre><code>## Warning: package 'tidyverse' was built under R version 4.4.2
+</code></pre>
+<pre><code>## Warning: package 'lubridate' was built under R version 4.4.2
+</code></pre>
+<pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.4     ✔ readr     2.1.5
+## ✔ forcats   1.0.0     ✔ stringr   1.5.1
+## ✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
+## ✔ purrr     1.0.2     
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors
+</code></pre>
+<pre><code class="language-r">library(ggplot2)
+library(readr)
+library(dplyr)
+library(broom)
+</code></pre>
+<h2 id="1-cargar-datos">1. Cargar datos</h2>
+<h3 id="dataset-1-mtcars-pre-instalado-en-r">Dataset 1: mtcars (pre-instalado en R)</h3>
+<pre><code class="language-r">data(mtcars)
+head(mtcars)
+</code></pre>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
+</code></pre>
+<h2 id="dataset-2-iris-pre-instalado-en-r">Dataset 2: iris (pre-instalado en R)</h2>
+<pre><code class="language-r">data(iris)
+head(iris)
+</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa
+</code></pre>
+<h2 id="dataset-3-example_datacsv-archivo-externo">Dataset 3: example_data.csv (archivo externo)</h2>
+<h3 id="asegúrate-de-tener-el-archivo-example_datacsv-en-tu-directorio-de-trabajo">Asegúrate de tener el archivo &ldquo;example_data.csv&rdquo; en tu directorio de trabajo</h3>
+<pre><code class="language-r">#example_data &lt;- read_csv(&quot;example_data.csv&quot;)
+#head(example_data)
+</code></pre>
+<h1 id="2-análisis-estadístico-básico">2. Análisis estadístico básico</h1>
+<pre><code class="language-r">summary_stats_mtcars &lt;- summary(mtcars)
+summary_stats_iris &lt;- summary(iris)
+# summary_stats_example &lt;- summary(example_data)
+</code></pre>
+<pre><code class="language-r">print(&quot;Resumen estadístico de mtcars:&quot;)
+</code></pre>
+<pre><code>## [1] &quot;Resumen estadístico de mtcars:&quot;
+</code></pre>
+<pre><code class="language-r">print(summary_stats_mtcars)
+</code></pre>
+<pre><code>##       mpg             cyl             disp             hp       
+##  Min.   :10.40   Min.   :4.000   Min.   : 71.1   Min.   : 52.0  
+##  1st Qu.:15.43   1st Qu.:4.000   1st Qu.:120.8   1st Qu.: 96.5  
+##  Median :19.20   Median :6.000   Median :196.3   Median :123.0  
+##  Mean   :20.09   Mean   :6.188   Mean   :230.7   Mean   :146.7  
+##  3rd Qu.:22.80   3rd Qu.:8.000   3rd Qu.:326.0   3rd Qu.:180.0  
+##  Max.   :33.90   Max.   :8.000   Max.   :472.0   Max.   :335.0  
+##       drat             wt             qsec             vs        
+##  Min.   :2.760   Min.   :1.513   Min.   :14.50   Min.   :0.0000  
+##  1st Qu.:3.080   1st Qu.:2.581   1st Qu.:16.89   1st Qu.:0.0000  
+##  Median :3.695   Median :3.325   Median :17.71   Median :0.0000  
+##  Mean   :3.597   Mean   :3.217   Mean   :17.85   Mean   :0.4375  
+##  3rd Qu.:3.920   3rd Qu.:3.610   3rd Qu.:18.90   3rd Qu.:1.0000  
+##  Max.   :4.930   Max.   :5.424   Max.   :22.90   Max.   :1.0000  
+##        am              gear            carb      
+##  Min.   :0.0000   Min.   :3.000   Min.   :1.000  
+##  1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:2.000  
+##  Median :0.0000   Median :4.000   Median :2.000  
+##  Mean   :0.4062   Mean   :3.688   Mean   :2.812  
+##  3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:4.000  
+##  Max.   :1.0000   Max.   :5.000   Max.   :8.000
+</code></pre>
+<pre><code class="language-r">print(&quot;Resumen estadístico de iris:&quot;)
+</code></pre>
+<pre><code>## [1] &quot;Resumen estadístico de iris:&quot;
+</code></pre>
+<pre><code class="language-r">print(summary_stats_iris)
+</code></pre>
+<pre><code>##   Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        Species  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## 
+</code></pre>
+<pre><code class="language-r">#print(&quot;Resumen estadístico de example_data:&quot;)
+#print(summary_stats_example)
+</code></pre>
+<h2 id="3-análisis-exploratorio-de-datos-eda">3. Análisis exploratorio de datos (EDA)</h2>
+<h3 id="usamos-ggplot2-para-visualizar-distribuciones-y-relaciones">Usamos ggplot2 para visualizar distribuciones y relaciones</h3>
+<pre><code class="language-r">ggplot(mtcars, aes(x = wt, y = mpg)) + 
+  geom_point() + 
+  labs(title = &quot;Relación entre peso y millas por galón (mtcars)&quot;, x = &quot;Peso&quot;, y = &quot;Millas por galón&quot;) +
+  theme_minimal()
+</code></pre>
+<img src="/2025/02/15/taller-1/index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+<pre><code class="language-r">ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point() + 
+  labs(title = &quot;Relación entre longitud y ancho del sépalo (iris)&quot;, x = &quot;Longitud del sépalo&quot;, y = &quot;Ancho del sépalo&quot;) +
+  theme_minimal()
+</code></pre>
+<img src="/2025/02/15/taller-1/index_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<h2 id="4-análisis-visual">4. Análisis visual</h2>
+<h3 id="histograma-para-ejemplo_data">Histograma para ejemplo_data</h3>
+<pre><code class="language-r">ggplot(example_data, aes(x = column_name)) + 
+  geom_histogram(binwidth = 5, fill = &quot;blue&quot;, color = &quot;black&quot;) + 
+  labs(title = &quot;Distribución de una variable en example_data&quot;, x = &quot;Variable&quot;, y = &quot;Frecuencia&quot;) +
+  theme_minimal()
+</code></pre>
+<h2 id="5-regresión-lineal-simple">5. Regresión lineal simple</h2>
+<h3 id="usando-mtcars">Usando mtcars</h3>
+<pre><code class="language-r">modelo_lineal &lt;- lm(mpg ~ wt, data = mtcars)
+summary(modelo_lineal)
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = mpg ~ wt, data = mtcars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
+## wt           -5.3445     0.5591  -9.559 1.29e-10 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 3.046 on 30 degrees of freedom
+## Multiple R-squared:  0.7528,	Adjusted R-squared:  0.7446 
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10
+</code></pre>
+<h2 id="visualización-de-la-regresión-lineal">Visualización de la regresión lineal</h2>
+<pre><code class="language-r">ggplot(mtcars, aes(x = wt, y = mpg)) + 
+  geom_point() + 
+  geom_smooth(method = &quot;lm&quot;, se = FALSE, color = &quot;red&quot;) + 
+  labs(title = &quot;Regresión lineal simple: mpg vs wt&quot;, x = &quot;Peso&quot;, y = &quot;Millas por galón&quot;) +
+  theme_minimal()
+</code></pre>
+<pre><code>## `geom_smooth()` using formula = 'y ~ x'
+</code></pre>
+<img src="/2025/02/15/taller-1/index_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<h2 id="6-regresión-múltiple">6. Regresión múltiple</h2>
+<h2 id="usando-iris">Usando iris</h2>
+<pre><code class="language-r">modelo_multiple &lt;- lm(Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, data = iris)
+summary(modelo_multiple)
+</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Sepal.Length ~ Sepal.Width + Petal.Length + Petal.Width, 
+##     data = iris)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.82816 -0.21989  0.01875  0.19709  0.84570 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   1.85600    0.25078   7.401 9.85e-12 ***
+## Sepal.Width   0.65084    0.06665   9.765  &lt; 2e-16 ***
+## Petal.Length  0.70913    0.05672  12.502  &lt; 2e-16 ***
+## Petal.Width  -0.55648    0.12755  -4.363 2.41e-05 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.3145 on 146 degrees of freedom
+## Multiple R-squared:  0.8586,	Adjusted R-squared:  0.8557 
+## F-statistic: 295.5 on 3 and 146 DF,  p-value: &lt; 2.2e-16
+</code></pre>
+<h2 id="7-guardar-resultados">7. Guardar resultados</h2>
+<pre><code class="language-r">#write_csv(example_data, &quot;processed_example_data.csv&quot;)
+saveRDS(modelo_lineal, &quot;modelo_lineal.rds&quot;)
+saveRDS(modelo_multiple, &quot;modelo_multiple.rds&quot;)
+</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
